@@ -14,7 +14,10 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        $data['user'] = Auth::user();
+        $data['id'] = Auth::id();
+        
+        return view('admin.index', ['data'=> $data]);
     }
 
     /**
