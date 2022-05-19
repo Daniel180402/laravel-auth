@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -14,10 +16,9 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $data['user'] = Auth::user();
-        $data['id'] = Auth::id();
+        $sites = Site::paginate(20);
         
-        return view('admin.index', ['data'=> $data]);
+        return view('admin.sites.index', ['sites'=> $sites]);
     }
 
     /**
@@ -47,9 +48,9 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Site $site)
     {
-        //
+        return view('admin.sites.show', compact("site"));
     }
 
     /**
